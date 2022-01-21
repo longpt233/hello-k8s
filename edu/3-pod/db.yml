@@ -1,0 +1,15 @@
+apiVersion: v1  # Kubernetes Pods API
+kind: Pod       # what to do 
+
+metadata:   # cung cap them thong tin, k anh huong behavior 
+  name: db-pod
+  labels:  # for controller 
+    type: db
+    vendor: MongoLabs
+
+spec:    # define on 1 container 
+  containers:
+  - name: db-container
+    image: mongo:3.3
+    command: ["mongod"]
+    args: ["--rest", "--httpinterface"]

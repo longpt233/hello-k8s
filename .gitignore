@@ -17,3 +17,5 @@
 
 init-vm/.vagrant/*
 *.log
+
+k8s-specs
