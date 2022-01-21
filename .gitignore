@@ -17,3 +17,4 @@
 
 init-vm/.vagrant/*
 *.log
+*.vagrant
