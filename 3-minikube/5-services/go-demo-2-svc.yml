@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-demo-2
+spec:  # tương đương lệnh expose 
+  type: NodePort  #  nếu bỏ đi thì chỉ nội bộ clustẻr mới truy nhập d. ví dụ db thì k caagn cho ra ngoài làm gì cả   
+  ports:
+  - port: 28017   # bên trong 28017 -> ra ngoài 30001
+    nodePort: 30001  # không nói jh thì trong ngoài như nhau 
+    protocol: TCP
+  selector:  # lại chọn pod thôi 
+    type: backend
+    service: go-demo-2

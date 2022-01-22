@@ -1,0 +1,30 @@
+apiVersion:  apps/v1  # có thể đổi tên khác 
+kind: ReplicaSet
+metadata:
+  name: go-demo-2
+spec:
+  replicas: 4  # default 1 
+  selector:    # chọn không phân biệt có phải là pod trong file này init không
+    matchLabels:
+      type: backend       # match với spec.template
+      service: go-demo-2  # tên ReplicaSet
+  template:   # nếu không đủ sẽ tạo theo  template tạo pod này
+    metadata:
+      labels:     # replica sẽ quét theo label này 
+        type: backend    # tạo các các lable cho pod  
+        service: go-demo-2
+        db: mongo
+        language: go
+    spec:  
+      containers:  # mặc định khởi tạo . chỗ khác khởi tạo mà có label thì vẫn nhận 
+      - name: db
+        image: mongo:3.3
+      - name: api
+        image: vfarcic/go-demo-2
+        env:
+        - name: DB
+          value: localhost
+        livenessProbe:
+          httpGet:
+            path: /demo/hello
+            port: 8080

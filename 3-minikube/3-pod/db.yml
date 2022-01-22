@@ -2,8 +2,8 @@ apiVersion: v1  # Kubernetes Pods API
 kind: Pod       # what to do 
 
 metadata:   # cung cap them thong tin, k anh huong behavior 
-  name: db-pod
-  labels:  # for controller 
+  name: db-pod  # tên pod 
+  labels:  # để có thông tin tí controller 
     type: db
     vendor: MongoLabs
 
