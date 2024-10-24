@@ -9,46 +9,141 @@ Vagrant.configure("2") do |config|
 
     # Khởi tạo máy ảo thứ nhất
     config.vm.define "machine1" do |machine1|
-    machine1.vm.network "private_network", ip: "192.168.56.2"
+    machine1.vm.network "private_network", ip: "192.168.56.11"
     config.vm.hostname = "k8s-master1"
     machine1.vm.provider "virtualbox" do |vb|
-          vb.memory = "2048" # 2GB RAM
-          vb.cpus = 1       # 1 core CPU
+          vb.memory = "1500" # 2GB RAM
+          vb.cpus = 2       # 1 core CPU
         end
+    config.vm.provision "file", source: "./ssh_config", destination: "/home/vagrant/.ssh/config"
 
     machine1.vm.provision "shell", inline: <<-SHELL
-          # Đặt pass 123 có tài khoản root và cho phép SSH
-        useradd k8scontrol
-        echo "123" | passwd --stdin k8scontrol
-        usermod -aG wheel k8scontrol
+        adduser spray
+        usermod -aG sudo spray
+        echo spray ALL=NOPASSWD:ALL | sudo tee -a  /etc/sudoers.d/spray
+        echo vagrant ALL=NOPASSWD:ALL | sudo tee -a  /etc/sudoers.d/vagrant
+        # useradd k8scontrol
+        # echo "123" | passwd --stdin k8scontrol
+        # usermod -aG wheel k8scontrol
         # sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-
-        systemctl reload sshd
+        # cp /home/vagrant/.ssh/config
+        # systemctl reload sshd
         swapoff -a
         sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
+        mkdir -p /home/spray/.ssh/config
+
+cat >>/home/spray/.ssh/config/ssh_config<<EOF
+Host localhost
+  StrictHostKeyChecking no
+
+Host 0.0.0.0
+  StrictHostKeyChecking no
+  
+Host k8s-*
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+EOF
+
+        chown -R spray:spray /home/spray/.ssh
+        chmod 700 /home/spray/.ssh
+        chmod 600 /home/spray/.ssh/config/ssh_config
+        systemctl reload sshd
+
+
 # Ghi nội dung sau ra file /etc/hosts để truy cập được các máy theo HOSTNAME
 cat >>/etc/hosts<<EOF
-192.168.56.2 k8s-master1
-192.168.56.3 k8s-node1
-192.168.56.4 k8s-kubespray
+192.168.56.11 k8s-master1
+192.168.56.12 k8s-master2
+192.168.56.10 k8s-kubespray
 EOF
+
+        # Cài đặt múi giờ
+        sudo timedatectl set-timezone Asia/Ho_Chi_Minh
+        # Cấu hình proxy trong /etc/environment
+        echo 'http_proxy="http://10.60.117.103:8085/"' | sudo tee -a /etc/environment
+        echo 'https_proxy="http://10.60.117.103:8085/"' | sudo tee -a /etc/environment
+        echo 'no_proxy="localhost,127.0.0.1"' | sudo tee -a /etc/environment
+        # Cấu hình proxy cho wget
+        echo 'use_proxy = on' | sudo tee -a /etc/wgetrc
+        echo 'http_proxy = http://10.60.117.103:8085/' | sudo tee -a /etc/wgetrc
+        echo 'https_proxy = http://10.60.117.103:8085/' | sudo tee -a /etc/wgetrc
+        # Cấu hình proxy cho apt và apt-get
+        echo 'Acquire::http::Proxy "http://10.60.117.103:8085/";' | sudo tee /etc/apt/apt.conf.d/95proxies
+        echo 'Acquire::https::Proxy "http://10.60.117.103:8085/";' | sudo tee -a /etc/apt/apt.conf.d/95proxies
+        
         SHELL
     end
-    # cai cho /etc/sudoers.d/trino dat ten la gi cung dc, tham chi apeend vao file da co thi cx oke
 
-    # Khởi tạo máy ảo thứ hai
+##################################################################################################################
+
+    # Khởi tạo máy ảo thứ nhất
     config.vm.define "machine2" do |machine2|
-    machine2.vm.network "private_network", ip: "192.168.56.3"
-    machine2.vm.provider "virtualbox" do |vb|
-          vb.memory = "2048" # 2GB RAM
-          vb.cpus = 1       # 1 core CPU
-        end
+      machine2.vm.network "private_network", ip: "192.168.56.12"
+      config.vm.hostname = "k8s-master2"
+      machine2.vm.provider "virtualbox" do |vb|
+            vb.memory = "1500" # 2GB RAM
+            vb.cpus = 2       # 1 core CPU
+          end
+      config.vm.provision "file", source: "./ssh_config", destination: "/home/vagrant/.ssh/config"
+  
+      machine2.vm.provision "shell", inline: <<-SHELL
+          adduser spray
+          usermod -aG sudo spray
+          echo spray ALL=NOPASSWD:ALL | sudo tee -a  /etc/sudoers.d/spray
+          echo vagrant ALL=NOPASSWD:ALL | sudo tee -a  /etc/sudoers.d/vagrant
+          # useradd k8scontrol
+          # echo "123" | passwd --stdin k8scontrol
+          # usermod -aG wheel k8scontrol
+          # sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+          # cp /home/vagrant/.ssh/config
+          # systemctl reload sshd
+          swapoff -a
+          sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+  
+          mkdir -p /home/spray/.ssh/config
+  
+cat >>/home/spray/.ssh/config/ssh_config<<EOF
+Host localhost
+  StrictHostKeyChecking no
 
-    machine2.vm.provision "shell", inline: <<-SHELL
-          adduser trino
-          usermod -aG sudo trino
-          echo trino ALL=NOPASSWD:ALL | sudo tee -a  /etc/sudoers.d/trino
-        SHELL
-    end
+Host 0.0.0.0
+  StrictHostKeyChecking no
+  
+Host k8s-*
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+EOF
+
+        chown -R spray:spray /home/spray/.ssh
+        chmod 700 /home/spray/.ssh
+        chmod 600 /home/spray/.ssh/config/ssh_config
+        systemctl reload sshd
+
+
+# Ghi nội dung sau ra file /etc/hosts để truy cập được các máy theo HOSTNAME
+cat >>/etc/hosts<<EOF
+192.168.56.11 k8s-master1
+192.168.56.12 k8s-master2
+192.168.56.10 k8s-kubespray
+EOF
+  
+          # Cài đặt múi giờ
+          sudo timedatectl set-timezone Asia/Ho_Chi_Minh
+          # Cấu hình proxy trong /etc/environment
+          echo 'http_proxy="http://10.60.117.103:8085/"' | sudo tee -a /etc/environment
+          echo 'https_proxy="http://10.60.117.103:8085/"' | sudo tee -a /etc/environment
+          echo 'no_proxy="localhost,127.0.0.1"' | sudo tee -a /etc/environment
+          # Cấu hình proxy cho wget
+          echo 'use_proxy = on' | sudo tee -a /etc/wgetrc
+          echo 'http_proxy = http://10.60.117.103:8085/' | sudo tee -a /etc/wgetrc
+          echo 'https_proxy = http://10.60.117.103:8085/' | sudo tee -a /etc/wgetrc
+          # Cấu hình proxy cho apt và apt-get
+          echo 'Acquire::http::Proxy "http://10.60.117.103:8085/";' | sudo tee /etc/apt/apt.conf.d/95proxies
+          echo 'Acquire::https::Proxy "http://10.60.117.103:8085/";' | sudo tee -a /etc/apt/apt.conf.d/95proxies
+          
+          SHELL
+      end
+  
+##################################################################################################################
 end
