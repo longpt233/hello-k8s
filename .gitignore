@@ -19,4 +19,6 @@ init-vm/.vagrant/*
 *.log 
 k8s-specs 
 *.vagrant
- 
+
+4-kube-spray/id_rsa
+4-kube-spray/id_rsa.pub

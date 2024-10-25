@@ -1,0 +1,134 @@
+```
+root@k8s-master1:~# tree /etc/kubernetes/
+/etc/kubernetes/              
+├── admin.conf         
+├── admin.conf.28938.2024-10-25@09:38:19~
+├── admin.conf.old
+├── calico-config.yml                        
+├── calico-cr.yml     
+├── calico-crb.yml
+├── calico-ipamconfig.yml           
+├── calico-kube-controllers.yml         
+├── calico-kube-cr.yml              
+├── calico-kube-crb.yml                    
+├── calico-kube-sa.yml
+├── calico-node-sa.yml   
+├── calico-node.yml  
+├── controller-manager.conf
+├── controller-manager.conf.28963.2024-10-25@09:38:19~
+├── controller-manager.conf.old
+├── coredns-clusterrole.yml
+├── coredns-clusterrolebinding.yml
+├── coredns-config.yml        
+├── coredns-deployment.yml        
+├── coredns-sa.yml            
+├── coredns-svc.yml               
+├── dns-autoscaler-clusterrole.yml
+├── dns-autoscaler-clusterrolebinding.yml
+├── dns-autoscaler-sa.yml
+├── dns-autoscaler.yml 
+├── kdd-crds.yml    
+├── kubeadm-config.yaml
+├── kubeadm-images.yaml
+├── kubelet-config.yaml
+├── kubelet.conf
+├── kubelet.conf.28988.2024-10-25@09:38:19~
+├── kubelet.conf.old
+├── kubelet.env
+├── kubernetes-services-endpoint.yml
+├── kubescheduler-config.yaml
+
+├── manifests
+│   ├── kube-apiserver.yaml
+│   ├── kube-controller-manager.yaml
+│   └── kube-scheduler.yaml
+├── node-crb.yml
+├── nodelocaldns-config.yml
+├── nodelocaldns-daemonset.yml
+├── nodelocaldns-sa.yml
+├── pki -> /etc/kubernetes/ssl
+├── scheduler.conf
+├── scheduler.conf.29013.2024-10-25@09:38:20~
+├── scheduler.conf.old
+└── ssl
+    ├── apiserver-kubelet-client.crt
+    ├── apiserver-kubelet-client.crt.old
+    ├── apiserver-kubelet-client.key
+    ├── apiserver-kubelet-client.key.old
+    ├── apiserver.crt
+    ├── apiserver.crt.old
+    ├── apiserver.key
+    ├── apiserver.key.old
+    ├── ca.crt
+    ├── ca.key
+    ├── front-proxy-ca.crt
+    ├── front-proxy-ca.key
+    ├── front-proxy-client.crt
+    ├── front-proxy-client.crt.old
+    ├── front-proxy-client.key
+    ├── front-proxy-client.key.old
+    ├── sa.key
+    └── sa.pub
+
+3 directories, 64 files
+
+```
+- treen con 2 lai khac con 1 nhi -> chac phai test thu ha xem sao
+
+```
+root@k8s-master2:~# tree /etc/kubernetes/
+/etc/kubernetes/
+├── admin.conf
+├── admin.conf.27953.2024-10-25@09:38:19~
+├── admin.conf.old
+├── calico-config.yml
+├── calico-cr.yml
+├── calico-crb.yml
+├── calico-ipamconfig.yml
+├── calico-node-sa.yml
+├── calico-node.yml
+├── controller-manager.conf
+├── controller-manager.conf.27978.2024-10-25@09:38:19~
+├── controller-manager.conf.old
+├── kdd-crds.yml
+├── kubeadm-config.yaml
+├── kubeadm-controlplane.yaml
+├── kubeadm-images.yaml
+├── kubelet-config.yaml
+├── kubelet.conf
+├── kubelet.conf.28003.2024-10-25@09:38:19~
+├── kubelet.conf.old
+├── kubelet.env
+├── kubernetes-services-endpoint.yml
+├── kubescheduler-config.yaml
+├── manifests
+│   ├── kube-apiserver.yaml
+│   ├── kube-controller-manager.yaml
+│   └── kube-scheduler.yaml
+├── pki -> /etc/kubernetes/ssl
+├── scheduler.conf
+├── scheduler.conf.28028.2024-10-25@09:38:20~
+├── scheduler.conf.old
+└── ssl
+    ├── apiserver-kubelet-client.crt
+    ├── apiserver-kubelet-client.crt.old
+    ├── apiserver-kubelet-client.key
+    ├── apiserver-kubelet-client.key.old
+    ├── apiserver.crt
+    ├── apiserver.crt.old
+    ├── apiserver.key
+    ├── apiserver.key.old
+    ├── ca.crt
+    ├── ca.key
+    ├── front-proxy-ca.crt
+    ├── front-proxy-ca.key
+    ├── front-proxy-client.crt
+    ├── front-proxy-client.crt.old
+    ├── front-proxy-client.key
+    ├── front-proxy-client.key.old
+    ├── sa.key
+    └── sa.pub
+
+3 directories, 47 files
+
+```

@@ -165,7 +165,7 @@ EOF
       machine4.vm.network "private_network", ip: "192.168.56.21"
       machine4.vm.hostname = "k8s-node1"
       machine4.vm.provider "virtualbox" do |vb|
-            vb.memory = "1024" # 2GB RAM
+            vb.memory = "2024" # 2GB RAM
             vb.cpus = 2       # 1 core CPU
           end  
       machine4.vm.provision "shell", inline: <<-SHELL
@@ -213,7 +213,7 @@ config.vm.define "machine5" do |machine5|
   machine5.vm.network "private_network", ip: "192.168.56.22"
   machine5.vm.hostname = "k8s-node2"
   machine5.vm.provider "virtualbox" do |vb|
-        vb.memory = "1024" # 2GB RAM
+        vb.memory = "2024" # 2GB RAM
         vb.cpus = 2       # 1 core CPU
       end  
   machine5.vm.provision "shell", inline: <<-SHELL
@@ -261,7 +261,7 @@ config.vm.define "machine6" do |machine6|
   machine6.vm.network "private_network", ip: "192.168.56.23"
   machine6.vm.hostname = "k8s-node3"
   machine6.vm.provider "virtualbox" do |vb|
-        vb.memory = "1024" # 2GB RAM
+        vb.memory = "2024" # 2GB RAM
         vb.cpus = 2       # 1 core CPU
       end  
   machine6.vm.provision "shell", inline: <<-SHELL
