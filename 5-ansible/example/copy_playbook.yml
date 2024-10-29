@@ -1,0 +1,7 @@
+- name: Copy file with owner and permissions
+  copy:
+    src: /home/app/foo.conf
+    dest: /etc/foo.conf
+    owner: app
+    group: app
+    mode: '0644'

@@ -1,0 +1,1 @@
+ansible-palybook -i hosts my_playbook.yml
