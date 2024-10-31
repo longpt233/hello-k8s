@@ -31,3 +31,8 @@ bash -c "pip3 install --proxy='http://10.60.117.103:8085/' jmespath && export AN
 
 
 --proxy http://10.60.117.103:8085
+
+
+
+
+https://raman-pandey.medium.com/kubernetes-cluster-deployment-using-kubespray-ebc4bec082c1

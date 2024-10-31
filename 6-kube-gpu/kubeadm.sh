@@ -42,6 +42,7 @@ EOF
 
 sudo modprobe -a overlay br_netfilter
 
+# Mặc định, kernel Linux không cho phép định tuyến các gói IPv4 giữa các giao diện mạng, ngăn cản việc truyền dữ liệu qua lại. 
 # sysctl params required by setup, params persist across reboots
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables  = 1
@@ -103,3 +104,8 @@ Here is one example how you may list all running Kubernetes containers by using 
         - 'crictl --runtime-endpoint unix:///var/run/containerd/containerd.sock logs CONTAINERID'                                                                                             
 error execution phase wait-control-plane: could not initialize a Kubernetes cluster                                                                                                           
 To see the stack trace of this error execute with --v=5 or higher
+
+
+
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
