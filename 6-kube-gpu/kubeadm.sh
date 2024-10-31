@@ -4,6 +4,14 @@ https://viblo.asia/p/su-dung-kubeadm-tao-cluster-deploy-pod-network-flannel-eW65
 https://blog.radwell.codes/2022/07/single-node-kubernetes-cluster-via-kubeadm-on-ubuntu-22-04/
 https://github.com/hocchudong/ghichep-kubernetes/blob/master/docs/kubernetes-5min/02.Caidat-Kubernetes.md
 
+https://pwittrock.github.io/docs/setup/independent/install-kubeadm/
+https://viblo.asia/p/k8s-xay-dung-kubernetes-cluster-bang-cong-cu-kubeadm-tren-virtual-box-38X4ENOAJN2
+
+free -h
+# Đầu tiên là tắt swap
+sudo swapoff -a
+# Sau đó tắt swap mỗi khi khởi động trong /etc/fstab
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 
 sudo apt-get update
@@ -81,8 +89,10 @@ sudo systemctl restart containerd.service
 sudo kubeadm config images pull
 
 
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.208.164.173
 
+
+control plane sẽ tự động phân bổ địa chỉ IP trong CIDR chỉ định cho các pod trên mọi node trong cụm cluster. Bạn sẽ cần phải chọn CIDR sao cho không trùng với bất kỳ dải mạng hiện có để tránh xung đột địa chỉ IP
 
 
 [api-check] The API server is not healthy after 4m0.00103991s                                                                                                                                 
