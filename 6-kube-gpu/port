@@ -18,3 +18,16 @@ Any port numbers marked with * are overridable, so you will need to ensure any c
 Although etcd ports are included in master nodes, you can also host your own etcd cluster externally on custom ports.
 
 The pod network plugin you use (see below) may also require certain ports to be open. Since this differs with each pod network plugin, please see the documentation for the plugins about what port(s) those need.
+
+
+
+tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      1361194/etcd         
+tcp        0      0 127.0.0.1:2381          0.0.0.0:*               LISTEN      1361194/etcd         
+tcp        0      0 10.208.164.167:2380     0.0.0.0:*               LISTEN      1361194/etcd         
+tcp        0      0 10.208.164.167:2379     0.0.0.0:*               LISTEN      1361194/etcd  
+tcp        0      0 127.0.0.1:10248         0.0.0.0:*               LISTEN      1360763/kubelet    
+tcp6       0      0 :::10250                :::*                    LISTEN      1360763/kubelet    
+tcp        0      0 127.0.0.1:10259         0.0.0.0:*               LISTEN      1361214/kube-schedu 
+tcp        0      0 127.0.0.1:10257         0.0.0.0:*               LISTEN      1361181/kube-contro 
+tcp        0      0 127.0.0.1:43765         0.0.0.0:*               LISTEN      234568/containerd 
+tcp6       0      0 :::6443                 :::*                    LISTEN      1361206/kube-apiser 
