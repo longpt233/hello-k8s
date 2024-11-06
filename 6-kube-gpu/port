@@ -20,7 +20,7 @@ Although etcd ports are included in master nodes, you can also host your own etc
 The pod network plugin you use (see below) may also require certain ports to be open. Since this differs with each pod network plugin, please see the documentation for the plugins about what port(s) those need.
 
 
-
+master
 tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      1361194/etcd         
 tcp        0      0 127.0.0.1:2381          0.0.0.0:*               LISTEN      1361194/etcd         
 tcp        0      0 10.208.164.167:2380     0.0.0.0:*               LISTEN      1361194/etcd         
@@ -31,3 +31,15 @@ tcp        0      0 127.0.0.1:10259         0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:10257         0.0.0.0:*               LISTEN      1361181/kube-contro 
 tcp        0      0 127.0.0.1:43765         0.0.0.0:*               LISTEN      234568/containerd 
 tcp6       0      0 :::6443                 :::*                    LISTEN      1361206/kube-apiser 
+udp        0      0 0.0.0.0:6784            0.0.0.0:*                           -                   
+udp6       0      0 :::6784                 :::*                                -  
+
+
+worker
+tcp6       0      0 :::10256                :::*                    LISTEN      812156/kube-proxy   
+tcp        0      0 127.0.0.1:10249         0.0.0.0:*               LISTEN      812156/kube-proxy 
+tcp6       0      0 :::10250                :::*                    LISTEN      793002/kubelet  
+tcp        0      0 127.0.0.1:10248         0.0.0.0:*               LISTEN      793002/kubelet           
+tcp        0      0 127.0.0.1:38011         0.0.0.0:*               LISTEN      811244/containerd   
+udp        0      0 0.0.0.0:6784            0.0.0.0:*                           -                   
+udp6       0      0 :::6784                 :::*                                -  

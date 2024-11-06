@@ -30,6 +30,13 @@ I1101 18:50:43.620277  235970 kubelet.go:196] the value of KubeletConfiguration.
 [config/images] Pulled registry.k8s.io/etcd:3.5.15-0
 [config/images] Pulled registry.k8s.io/coredns/coredns:v1.10.1
 
+
+may pod chay ben may kia cung bi loi crash lien tuc ma khong bao loi ro rang -> cx can fix nhu nay (add host ben may woker cx khong an thua)
+
+[kube-proxy](https://stackoverflow.com/questions/75935431/kube-proxy-and-kube-flannel-crashloopbackoff)
+
+https://serverfault.com/questions/1117961/pods-from-kube-system-crashloopbackoff
+
 2. /proc/sys/net/bridge/bridge-nf-call-iptables 
 
 root@hello:~# kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.208.164.173
@@ -110,3 +117,20 @@ Environment=HTTP_PROXY=http://10.60.117.103:8085/ HTTPS_PROXY=http://10.60.117.1
 long@hello:~$ kubectl delete pod --namespace=kube-system kube-proxy-8hs49
 pod "kube-proxy-8hs49" deleted
 
+
+6. khong xoa dc calico 
+
+ 2199  kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.0/manifests/tigera-operator.yaml
+ 2200  kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.0/manifests/custom-resources.yaml
+ 2201  kubectl delete -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.0/manifests/custom-resources.yaml
+ 2202  kubectl delete -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.0/manifests/tigera-operator.yaml
+
+
+khogn hieu sao bao loi port 6784 cua wave
+
+Thg 11 06 17:10:47 vupc kubelet[793002]: E1106 17:10:47.609207  793002 kubelet.go:2009] failed to "KillPodSandbox" for "a186f989-a5df-4359-8f56-d306ac874a8b" with KillPodSandboxError: "rpc error: code = Unknown desc = failed to destroy network for sandbox \"2fbbcef213b718e5d87922b787de72f4d0db4aaa7ffa801c5016c7927537b604\": plugin type=\"weave-net\" name=\"weave\" failed (delete): Delete \"http://127.0.0.1:6784/ip/2fbbcef213b718e5d87922b787de72f4d0db4aaa7ffa801c5016c7927537b604\": dial tcp 127.0.0.1:6784: connect: connection refused"
+Thg 11 06 17:10:47 vupc kubelet[793002]: E1106 17:10:47.609220  793002 pod_workers.go:1300] "Error syncing pod, skipping" err="failed to \"KillPodSandbox\" for \"a186f989-a5df-4359-8f56-d306ac874a8b\" with KillPodSandboxError: \"rpc error: code = Unknown desc = failed to destroy network for sandbox \\\"2fbbcef213b718e5d87922b787de72f4d0db4aaa7ffa801c5016c7927537b604\\\": plugin type=\\\"weave-net\\\" name=\\\"weave\\\" failed (delete): Delete \\\"http://127.0.0.1:6784/ip/2fbbcef213b718e5d87922b787de72f4d0db4aaa7ffa801c5016c7927537b604\\\": dial tcp 127.0.0.1:6784: connect: connection refused\"" pod="calico-apiserver/calico-apiserver-7fcbc99644-mrm2g" podUID="a186f989-a5df-4359-8f56-d306ac874a8b"
+
+
+-> apply lai weave thi lai dc 
+2203  kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml

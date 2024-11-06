@@ -98,18 +98,16 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/u
 http_proxy="http://10.208.164.185:9999/"
 https_proxy="http://10.208.164.185:9999/"
 ftp_proxy="http://10.208.164.185:9999/"
+no_proxy=hadoop12,127.0.0.1,10.208.164.167,localhost,10.208.164.173
 
 sudo systemctl restart containerd.service
 
 ##### end mo proxy
 sudo kubeadm config images pull
 
+export no_proxy=127.0.0.1,10.208.164.167,localhost,10.208.164.173,kubeadmnexportinit && kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.208.164.167
 
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.208.164.173
-
-export no_proxy=127.0.0.1,10.208.164.167 && kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.208.164.167
-
-export no_proxy=127.0.0.1,10.208.164.167 && kubeadm join 10.208.164.167:6443 --token av3kif.ell51auabe7k6zaa \
+export no_proxy=hadoop12,127.0.0.1,10.208.164.167,localhost,10.208.164.173,kubeadmjoin  && kubeadm join 10.208.164.167:6443 --token av3kif.ell51auabe7k6zaa \
 	--discovery-token-ca-cert-hash sha256:32ba89fc377d8da013b34801ca7e2a0587eaedbb6d60543fad18cf1b1d811aeb
 
 --config=/etc/kubernetes/kubeadm-config.yaml
