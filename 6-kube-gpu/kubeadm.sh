@@ -1,11 +1,12 @@
-https://viblo.asia/p/devops-k8s-phan-2-setup-kubernetes-cluster-Az45bjjO5xY
 https://github.com/sontn/kubeadm
-https://viblo.asia/p/su-dung-kubeadm-tao-cluster-deploy-pod-network-flannel-eW65Gb79lDO
-https://blog.radwell.codes/2022/07/single-node-kubernetes-cluster-via-kubeadm-on-ubuntu-22-04/
-https://github.com/hocchudong/ghichep-kubernetes/blob/master/docs/kubernetes-5min/02.Caidat-Kubernetes.md
-
+https://github.com/hocchudong/ghichep-kubernetes/blob/master/docs/kubernetes-5min/02.Caidat-Kubernetes.md   -> outdate
 https://pwittrock.github.io/docs/setup/independent/install-kubeadm/
-https://viblo.asia/p/k8s-xay-dung-kubernetes-cluster-bang-cong-cu-kubeadm-tren-virtual-box-38X4ENOAJN2
+
+https://blog.radwell.codes/2022/07/single-node-kubernetes-cluster-via-kubeadm-on-ubuntu-22-04/
+
+https://viblo.asia/p/k8s-xay-dung-kubernetes-cluster-bang-cong-cu-kubeadm-tren-virtual-box-38X4ENOAJN2   -> link nay oke
+https://viblo.asia/p/devops-k8s-phan-2-setup-kubernetes-cluster-Az45bjjO5xY
+https://viblo.asia/p/su-dung-kubeadm-tao-cluster-deploy-pod-network-flannel-eW65Gb79lDO
 
 free -h
 # Đầu tiên là tắt swap
