@@ -7,6 +7,9 @@ https://github.com/NVIDIA/k8s-device-plugin#quick-start
 https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/
 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
 
+link can doc them ve mig 
+https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-operator-mig.html
+https://www.scaleway.com/en/docs/compute/gpu/how-to/use-mig-with-kubernetes/
 
 long@hello:~$ helm repo add nvidia https://helm.ngc.nvidia.com/nvidia \
    && helm repo update
