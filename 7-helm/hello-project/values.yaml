@@ -1,0 +1,7 @@
+# Release-wide Values
+replicas: 3
+version: 'plain-text'
+
+# Service Specific Values
+hello:
+  image: nginxdemos/hello
