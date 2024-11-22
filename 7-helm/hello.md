@@ -20,6 +20,9 @@ touch templates/service/coffee-service.yaml
 
 ```
 long@hello:~/Documents/hello-k8s/7-helm/hello-project$ helm install --debug --dry-run hello-project .
+
+helm install -n [namespace] [release-name] -f [custom-value-file] [chart]
+
 helm install hello-project hello-project
 kubectl get svc,po,deploy
 kubectl describe svc coffee-svc
@@ -33,3 +36,19 @@ helm history hello-project
 helm rollback hello-project 1
 helm uninstall hello-project
 ```
+
+4. trick 
+
+```
+yum install bash-completion -y  
+helm completion bash > /etc/bash_completion.d/helm
+Thoát session ssh và vào lại
+
+helm pull bitnami/nginx ; ls -la
+helm pull bitnami/nginx --untar
+
+
+
+```
+
+cho vui -> làm hết argo cho đã
