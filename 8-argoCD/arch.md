@@ -9,3 +9,7 @@ kiến trúc:
 Luồng: lấy manifest từ repo -> check -> thông báo
 
 2. 
+
+
+
+

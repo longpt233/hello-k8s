@@ -31,10 +31,19 @@ kubectl describe svc coffee-svc
 3. Vận hành 
 
 ```
+sửa value -> update
 helm upgrade hello-project hello-project
+
+show lịch sử
 helm history hello-project
+
+rollback
 helm rollback hello-project 1
 helm uninstall hello-project
+
+
+# show cấu hình? 
+helm template hello-project .
 ```
 
 4. trick 
@@ -52,3 +61,15 @@ helm pull bitnami/nginx --untar
 ```
 
 cho vui -> làm hết argo cho đã
+
+syntax helm 
+https://viblo.asia/p/su-dung-helm-chart-aWj53xgYK6m
+
+https://helm.sh/docs/chart_template_guide/function_list/#string-functions
+
+upper, title, replace, camelcase
+IF
+With: rút gọn, if, load 1 list
+RANGE
+Include/Template
+Print function
