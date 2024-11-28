@@ -22,3 +22,5 @@ k8s-specs
 
 4-kube-spray/id_rsa
 4-kube-spray/id_rsa.pub
+
+8-argoCD/pass.txt
