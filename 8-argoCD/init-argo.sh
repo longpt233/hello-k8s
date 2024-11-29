@@ -34,5 +34,5 @@ ssh -f -N -L 9090:192.168.49.2:32644 admini@171.244.xxx.xxx
 
 lệnh sau chạy trên shell của rancher lỗi éo jh đấy 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
-siKQdCXWnBuLJqNE
+*************
 >

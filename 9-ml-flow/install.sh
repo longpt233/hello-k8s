@@ -42,4 +42,8 @@ systemctl daemon-reload  && systemctl enable mlflow.service
 
 
 systemctl start mlflow.service
-systemctl status mlflow.service    
+systemctl status mlflow.service   
+
+https://github.com/yashaswi-nayak/mlflow-adventure
+https://towardsdatascience.com/machine-learning-adventures-with-mlflow-64127713b0a1
+https://mlflow.org/docs/latest/model-registry.html#new-model-deployment-tools
