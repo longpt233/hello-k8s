@@ -8,7 +8,8 @@ kiến trúc:
 
 Luồng: lấy manifest từ repo -> check -> thông báo
 
-2. 
+2.  HA 
+https://medium.com/@megaurav25/argocd-ha-setup-for-production-da38cbb8be
 
 
 
