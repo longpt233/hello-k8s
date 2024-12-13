@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-1
+spec:
+  restartPolicy: OnFailure
+  runtimeClassName: nvidia # k3s setitng requirement: https://docs.k3s.io/advanced#alternative-container-runtime-support
+  containers:
+  - name: gpu-test
+    image: nvcr.io/nvidia/pytorch:24.01-py3  # cai nay nagn vl
+    # command: [ "python" ]
+    # args: ["/opt/pytorch/examples/upstream/mnist/main.py'" ]
+    command: ["bash", "-c"]
+    args:
+      - |
+        nvidia-smi -L; sleep infinity
+    resources:
+      limits:
+        nvidia.com/gpu: 2
+  nodeSelector:
+      nvidia.com/gpu.product : NVIDIA-A30-MIG-1g.6gb
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-2
+spec:
+  restartPolicy: OnFailure
+  runtimeClassName: nvidia
+  containers:
+  - name: gpu-test
+    image: nvcr.io/nvidia/pytorch:24.01-py3
+    command: ["bash", "-c"]
+    args:
+      - |
+        nvidia-smi -L; sleep infinity
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+  nodeSelector:
+      nvidia.com/gpu.product : NVIDIA-A30-MIG-1g.6gb

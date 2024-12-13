@@ -4,17 +4,30 @@ metadata:
   name: test-1
 spec:
   restartPolicy: OnFailure
-  runtimeClassName: nvidia # k3s setitng requirement
+  runtimeClassName: nvidia # k3s setitng requirement: https://docs.k3s.io/advanced#alternative-container-runtime-support
   containers:
   - name: gpu-test
     image: nvcr.io/nvidia/pytorch:24.01-py3  # cai nay nagn vl
-    command: [ "/bin/bash" ]
-    args: [" -c 'cd /opt/pytorch/examples/upstream/mnist && python main.py'" ]
+    # command: [ "python" ]
+    # args: ["/opt/pytorch/examples/upstream/mnist/main.py'" ]
+    command: ["python3", "-c"]
+    args:
+      - |
+        import torch;
+        print(f"Torch CUDA available: {torch.cuda.is_available()}");
+        print(f"Torch CUDA device count: {torch.cuda.device_count()}");
+        print('__CUDNN VERSION:', torch.backends.cudnn.version());
+        print('__Number CUDA Devices:', torch.cuda.device_count());
+        print('__Devices');
+        call(["nvidia-smi", "--format=csv", "--query-gpu=index,name,driver_version,memory.total,memory.used,memory.free"]);
+        print('Active CUDA Device: GPU', torch.cuda.current_device());
+        print ('Available devices ', torch.cuda.device_count());
+        print ('Current cuda device ', torch.cuda.current_device());
     resources:
       limits:
         nvidia.com/gpu: 1
   nodeSelector:
-      nvidia.com/gpu.product : NVIDIA-A30-MIG-2g.12gb
+      nvidia.com/gpu.product : NVIDIA-A30-MIG-1g.6gb
 
 ---
 apiVersion: v1
@@ -27,10 +40,21 @@ spec:
   containers:
   - name: gpu-test
     image: nvcr.io/nvidia/pytorch:24.01-py3
-    command: [ "/bin/bash" ]
-    args: [" -c 'cd /opt/pytorch/examples/upstream/mnist && python main.py'" ]
+    command: ["python3", "-c"]
+    args:
+      - |
+        import torch;
+        print(f"Torch CUDA available: {torch.cuda.is_available()}");
+        print(f"Torch CUDA device count: {torch.cuda.device_count()}");
+        print('__CUDNN VERSION:', torch.backends.cudnn.version());
+        print('__Number CUDA Devices:', torch.cuda.device_count());
+        print('__Devices');
+        call(["nvidia-smi", "--format=csv", "--query-gpu=index,name,driver_version,memory.total,memory.used,memory.free"]);
+        print('Active CUDA Device: GPU', torch.cuda.current_device());
+        print ('Available devices ', torch.cuda.device_count());
+        print ('Current cuda device ', torch.cuda.current_device());
     resources:
       limits:
         nvidia.com/gpu: 1
   nodeSelector:
-      nvidia.com/gpu.product : NVIDIA-A30-MIG-2g.12gb
+      nvidia.com/gpu.product : NVIDIA-A30-MIG-1g.6gb

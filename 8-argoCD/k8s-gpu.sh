@@ -212,6 +212,7 @@ pod/test-2   0/1     Completed   0          6m48s   10.42.0.116   5002544   <non
 
 NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE     SELECTOR
 service/kubernetes   ClusterIP   10.43.0.1    <none>        443/TCP   3h19m   <none>
+
 root@5002544:~# kubectl get -f deploy-mig.yaml -o name | xargs -I{} kubectl logs {}  
 GPU 0: NVIDIA A30 (UUID: GPU-e28f423e-c8af-4063-e053-c464cd477fed)
   MIG 2g.12gb     Device  0: (UUID: MIG-19db5564-eef7-53fa-82f2-af838d10fecc)
@@ -222,6 +223,25 @@ root@5002544:~# nvidia-smi -L
 GPU 0: NVIDIA A30 (UUID: GPU-e28f423e-c8af-4063-e053-c464cd477fed)
   MIG 2g.12gb     Device  0: (UUID: MIG-19db5564-eef7-53fa-82f2-af838d10fecc)
   MIG 2g.12gb     Device  1: (UUID: MIG-5effae5b-c755-597e-b5e0-4a91b98edcfe)
+
+
+deploy-mig-train2: 
+root@5002544:~# kubectl logs pod/test-2
+GPU 0: NVIDIA A30 (UUID: GPU-e28f423e-c8af-4063-e053-c464cd477fed)
+  MIG 1g.6gb      Device  0: (UUID: MIG-7e8d6bad-669c-5c44-9588-609928890d3f)
+root@5002544:~# kubectl logs pod/test-1
+GPU 0: NVIDIA A30 (UUID: GPU-e28f423e-c8af-4063-e053-c464cd477fed)
+  MIG 1g.6gb      Device  0: (UUID: MIG-291ffe01-1821-54b5-aba9-94531dd1361f)
+  MIG 1g.6gb      Device  1: (UUID: MIG-7ec6c1ec-7881-51d4-a488-abfa96b2086a)
+root@5002544:~# nvidia-smi -L
+GPU 0: NVIDIA A30 (UUID: GPU-e28f423e-c8af-4063-e053-c464cd477fed)
+  MIG 1g.6gb      Device  0: (UUID: MIG-291ffe01-1821-54b5-aba9-94531dd1361f)
+  MIG 1g.6gb      Device  1: (UUID: MIG-a85c12f0-981d-5057-a3c2-cb3e074d4485)
+  MIG 1g.6gb      Device  2: (UUID: MIG-7e8d6bad-669c-5c44-9588-609928890d3f)
+  MIG 1g.6gb      Device  3: (UUID: MIG-7ec6c1ec-7881-51d4-a488-abfa96b2086a)
+
+
+
 
 
 

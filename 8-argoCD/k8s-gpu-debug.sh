@@ -206,6 +206,8 @@ version = 2
 
 /usr/local/nvidia/toolkit/nvidia-container-runtime
 
+10 . apply mig train thi k thay dc
+
 
 
 
