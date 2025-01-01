@@ -24,7 +24,7 @@ ExternalName : service -> external addr (ít dùng)
 
 # Cluster ip 
 
-![](../../img-md/service-init-ip.png)
+![](./service-init-ip.png)
 
 - kubectl call create service 
 
@@ -36,7 +36,7 @@ ExternalName : service -> external addr (ít dùng)
 
 
 - trên là flow, còn hình sau là những gì xảy ra trong cụm 
-![](../../img-md/service-cluster-how.png)
+![](./service-cluster-how.png)
 
 
 # Command
@@ -67,7 +67,7 @@ Events:                  <none>
 
 - khả năng truy nhập 
 
-![](../../img-md/pod-port-access.png)
+![](./pod-port-access.png)
 
 
 
@@ -101,7 +101,7 @@ env:
 
 - flow : pod1 call pod2 -> pod1 lấy ra địa chỉ dns server -> call dns server -> lấy về ip cho pod2 -> call iptable(có cơ chể  load balance) -> call pod2 
 
-![](../../img-md/dns.png)
+![](./dns.png)
 
 # Q&A
 

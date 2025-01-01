@@ -41,7 +41,7 @@ kubectl rollout history \
 
 - minh họa quá trongh thay thế  theo rs 
 
-![](../../../img-md/deploy-rs.png)
+![](.deploy-rs.png)
 
 
 # Rollback 

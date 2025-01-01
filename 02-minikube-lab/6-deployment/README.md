@@ -2,7 +2,7 @@
 
 
 - cho đến phần này ta đã được tim hiều về : 
-![](../../img-md/rs-svc.png)
+![](./rs-svc.png)
 
 
 # Deploy 
@@ -22,10 +22,10 @@ replicaset.apps/
 # Flow 
 
 - overview qua 
-![](../../img-md/deploy-overview.png)
+![](./deploy-overview.png)
 
 - flow call tạo 
-![](../../img-md/deploy-call.png)
+![](./deploy-call.png)
 
 # Note 
 
@@ -37,4 +37,4 @@ replicaset.apps/
 
 # Tổng kết 
 
-![](../../img-md/deploy-all.png)
+![](./deploy-all.png)

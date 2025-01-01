@@ -1,11 +1,12 @@
 # Replica
 
 - pod 
-![](../../img-md/pod.png)
+
+![](./pod.png)
 
 - pod with replica
 
-![](../../img-md/rs-overview.png)
+![](./rs-overview.png)
 
 - scale pod 
 - pod not fault tolerant
@@ -55,7 +56,7 @@ kubectl apply -f go-demo-2-scaled.yml
 - scheduler watch API server -> chọn node đặt pod -> call API server 
 - kubelet watch API server -> run pod 
 
-![](../../img-md/replica.png)
+![](./replica.png)
 
 # Note 
 - chọn không phân biệt có phải là pod trong file này init không. tức là trong file bắt chạy 2, bên ngoài mình call tay chạy 1 cái rồi thì Replica +1 nữa cho đủ thôi 

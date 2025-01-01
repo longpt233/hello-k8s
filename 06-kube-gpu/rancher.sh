@@ -1,9 +1,6 @@
 https://viblo.asia/p/k8s-phan-2-cai-dat-kubernetes-cluster-va-rancher-m68Z0BL95kG
 luc cai rancher no co sang 1 cum k3s roi -> sao de tat di
 
-
-admin/Zou0nMoYjTBYS6DO
-
 docker run --name rancher-server --restart=unless-stopped  -d  -p 443:443 -p 80:80 \
 -v /opt/rancher:/var/lib/rancher \
 -e NO_PROXY="127.0.0.1,10.208.164.167,localhost,10.208.164.173,localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,cattle-system.svc,192.168.10.0/24,.svc,.cluster.local,example.com" \
